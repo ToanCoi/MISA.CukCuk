@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {}
+    "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {}
   },
   "projects": {
-    "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
+    "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
-        "projectName": "MISA.Infrastructure",
-        "projectPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
+        "projectUniqueName": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
+        "projectName": "MISA.Entity",
+        "projectPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\obj\\",
+        "outputPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,16 +39,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.0.90, )"
-            },
-            "MySqlConnector": {
-              "target": "Package",
-              "version": "[1.3.10, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
