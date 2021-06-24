@@ -4,7 +4,16 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Entities
 {
-    class ServiceResult
+    public class ServiceResult
     {
+        /// <summary>
+        /// Object tả chi tiết lỗi
+        /// </summary>
+        public Object Data { get; set; }
+
+        /// <summary>
+        /// Mã lỗi của MISA
+        /// </summary>
+        public int MISACode { get; set; }
     }
 }
