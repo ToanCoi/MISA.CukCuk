@@ -7,3 +7,12 @@ E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entit
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.csproj.CoreCompileInputs.cache
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\bin\Debug\netcoreapp3.1\MISA.Entity.deps.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\bin\Debug\netcoreapp3.1\MISA.Entity.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\bin\Debug\netcoreapp3.1\MISA.Entity.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.csprojAssemblyReference.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.AssemblyInfoInputs.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.AssemblyInfo.cs
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.csproj.CoreCompileInputs.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Entity\obj\Debug\netcoreapp3.1\MISA.Entity.pdb

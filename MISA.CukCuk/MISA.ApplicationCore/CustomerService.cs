@@ -1,10 +1,10 @@
 ﻿using MISA.ApplicationCore.Entities;
 using MISA.Infrastructure;
-using MISA.Infrastructure.Models;
 using MISA.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MISA.Entity.Models;
 
 namespace MISA.ApplicationCore
 {
@@ -21,6 +21,18 @@ namespace MISA.ApplicationCore
         {
             var customerDBContext = new CustomerDBContext();
             return customerDBContext.GetCustomers();
+        }
+
+        /// <summary>
+        /// Lấy khách hàng bằng Id
+        /// </summary>
+        /// <param name="id">Id của khách hàng</param>
+        /// <returns>Một Object khách hàng</returns>
+        /// CreatedBy: NVTOAN 25/06/2021
+        public Customer GetCustomerById(string id)
+        {
+            var customerDBContext = new CustomerDBContext();
+            return customerDBContext.GetCustomerById(id);
         }
 
         /// <summary>
@@ -100,16 +112,10 @@ namespace MISA.ApplicationCore
 
             //Nếu tất cả dữ liệu hợp lệ
             int rowAffects = customerDBContext.InsertCustomer(customer);
-            if(rowAffects > 0)
-            {
-                serviceResult.Code = MISACode.Success;
+            serviceResult.Code = MISACode.Success;
+            serviceResult.Data = rowAffects;
 
-                return serviceResult;
-            } 
-            else
-            {
-                
-            }
+            return serviceResult;
         }
         #endregion
     }

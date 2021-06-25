@@ -25,3 +25,32 @@ E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.A
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csprojAssemblyReference.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.AssemblyInfoInputs.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.AssemblyInfo.cs
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csproj.CoreCompileInputs.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.MvcApplicationPartsAssemblyInfo.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\appsettings.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.exe
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.deps.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.runtimeconfig.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.runtimeconfig.dev.json
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.CukCuk.Web.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\staticwebassets\MISA.CukCuk.Web.StaticWebAssets.Manifest.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\staticwebassets\MISA.CukCuk.Web.StaticWebAssets.xml
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\scopedcss\bundle\MISA.CukCuk.Web.styles.css
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.RazorTargetAssemblyInfo.cache
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csproj.CopyComplete
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.genruntimeconfig.cache

@@ -47,6 +47,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Dapper": "2.0.90",
+          "MISA.Entity": "1.0.0",
           "MySqlConnector": "1.3.10"
         },
         "compile": {
@@ -184,19 +185,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nvtoan\\.nuget\\packages\\": {}
+    "C:\\Users\\nguye\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+      "projectUniqueName": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
       "projectName": "MISA.ApplicationCore",
-      "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
-      "packagesPath": "C:\\Users\\nvtoan\\.nuget\\packages\\",
-      "outputPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\obj\\",
+      "projectPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+      "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
+      "outputPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nvtoan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -210,11 +211,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
-              "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj"
+            "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
+              "projectPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj"
             },
-            "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
-              "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
+            "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
+              "projectPath": "D:\\OneDrive - ptit.edu.vn\\MISA\\Exercise\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
             }
           }
         }
@@ -243,7 +244,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MISA.CukCuk.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,8 @@ using Dapper;
 using System.Data;
 using MySqlConnector;
 using MISA.ApplicationCore;
+using MISA.Entity.Models;
+using MISA.Entity;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,14 +41,9 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            var connectionString = "User Id=dev;" +
-                                    "Host=47.241.69.179;" +
-                                    "Port=3306;" +
-                                    "Password=12345678;" +
-                                    "Database=MISACukCuk_Demo;" +
-                                    "Character Set=utf8";
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-            var customer = dbConnection.Query<Customer>("Proc_GetCustomerById", new { CustomerId = id }, commandType: CommandType.StoredProcedure);
+            var customerService = new CustomerService();
+            var customer = customerService.GetCustomerById(id);
+
             return Ok(customer);
         }
 
@@ -59,100 +55,15 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Customer customer)
         {
-            var connectionString = "User Id=dev;" +
-                                    "Host=47.241.69.179;" +
-                                    "Port=3306;" +
-                                    "Password=12345678;" +
-                                    "Database=MISACukCuk_Demo;" +
-                                    "Character Set=utf8";
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            var customerService = new CustomerService();
 
-            //Validate không để trống
-            var customerCode = customer.CustomerCode;
-            var phoneNumber = customer.PhoneNumber;
-            var email = customer.Email;
+            var serviceResult = customerService.InsertCustomer(customer);
 
-            if (string.IsNullOrEmpty(customerCode))
+            if (serviceResult.Code == MISACode.Invalid)
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "CustomerCode", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999,
-
-                };
-
-                return BadRequest(msg);
+                return BadRequest(serviceResult);
             }
-            
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "PhoneNumber", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999
-                };
-
-                return BadRequest(msg);
-            }
-            
-            if (string.IsNullOrEmpty(email))
-            {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "Email", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999
-                };
-
-                return BadRequest(msg);
-            }
-
-            //validate trùng mã
-                //mã khách hàng
-            var res = dbConnection.Query<Customer>("Proc_GetCustomerByCode", new { CustomerCode = customer.CustomerCode }, commandType: CommandType.StoredProcedure);
-            if(res.Count() > 0)
-            {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "CustomerCode", msg = "Mã khách hàng đã tồn tại" },
-                    userMsg = "Mã khách hàng đã tồn tại",
-                    Code = 999
-                };
-
-                return BadRequest(msg);
-            }
-                //số điện thoại
-            res = dbConnection.Query<Customer>("Proc_GetCustomerByPhoneNumber", new { PhoneNumber = customer.PhoneNumber }, commandType: CommandType.StoredProcedure);
-            if(res.Count() > 0)
-            {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "PhoneNumber", msg = "Số điện thoại khách hàng đã tồn tại" },
-                    userMsg = "Số điện thoại khách hàng đã tồn tại",
-                    Code = 999
-                };
-
-                return BadRequest(msg);
-            }
-                //email
-            res = dbConnection.Query<Customer>("Proc_GetCustomerByEmail", new { Email = customer.Email }, commandType: CommandType.StoredProcedure);
-            if(res.Count() > 0)
-            {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "Email", msg = "Email đã tồn tại" },
-                    userMsg = "Email đã tồn tại",
-                    Code = 999
-                };
-
-                return BadRequest(msg);
-            }
-
-
-            var rowAffects = dbConnection.Execute("Proc_InsertCustomer", customer, commandType: CommandType.StoredProcedure);
-            if (rowAffects > 0)
+            else if (serviceResult.Code == MISACode.Success && (int)serviceResult.Data > 0)
             {
                 return Created("tc", customer);
             }
@@ -186,7 +97,7 @@ namespace MISA.CukCuk.Web.Controllers
                                    "Character Set=utf8";
             IDbConnection dbConnection = new MySqlConnection(connectionString);
 
-            var rowAffects = dbConnection.Query("Proc_DeleteCustomerById", new { CustomerId = id}, commandType: CommandType.StoredProcedure);
+            var rowAffects = dbConnection.Query("Proc_DeleteCustomerById", new { CustomerId = id }, commandType: CommandType.StoredProcedure);
 
             return Delete(id);
         }
