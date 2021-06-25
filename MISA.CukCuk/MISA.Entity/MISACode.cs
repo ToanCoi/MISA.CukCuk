@@ -4,7 +4,10 @@ using System.Text;
 
 namespace MISA.Entity
 {
-    class MisaEnum
+    public enum MISACode
     {
+        Valid = 100,
+        Invalid = 900,
+        Success = 200
     }
 }

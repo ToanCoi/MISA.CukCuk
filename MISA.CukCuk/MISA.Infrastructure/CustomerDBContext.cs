@@ -52,6 +52,26 @@ namespace MISA.Infrastructure
         }
 
         /// <summary>
+        /// Lấy thông tin khách hàng theo mã khách hàng
+        /// </summary>
+        /// <param name="customerCode">Mã khách hàng</param>
+        /// <returns>Object khách hàng</returns>
+        /// CreatedBy: NVTOAN 25/06/2021
+        public Customer GetCustomerByCode(string customerCode)
+        {
+            var connectionString = "User Id=dev;" +
+                                   "Host=47.241.69.179;" +
+                                   "Port=3306;" +
+                                   "Password=12345678;" +
+                                   "Database=MISACukCuk_Demo;" +
+                                   "Character Set=utf8";
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            var customer = dbConnection.Query<Customer>("Proc_GetCustomerByCode", new { CustomerCode = customerCode }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+            return customer;
+        }
+
+        /// <summary>
         /// Lấy thông tin khách hàng theo số điện thoại
         /// </summary>
         /// <param name="phoneNumber">Id của khách hàng</param>

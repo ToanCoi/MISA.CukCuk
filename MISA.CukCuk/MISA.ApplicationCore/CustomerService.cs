@@ -1,5 +1,7 @@
-﻿using MISA.Infrastructure;
+﻿using MISA.ApplicationCore.Entities;
+using MISA.Infrastructure;
 using MISA.Infrastructure.Models;
+using MISA.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,8 +29,11 @@ namespace MISA.ApplicationCore
         /// <param name="customer">Object khách hàng/param>
         /// <returns></returns>
         /// CreatedBy: NVTOAN 25/06/2021
-        public int InsertCustomer(Customer customer)
+        public ServiceResult InsertCustomer(Customer customer)
         {
+            var serviceResult = new ServiceResult();
+            var customerDBContext = new CustomerDBContext();
+
             //Validate không để trống
             var customerCode = customer.CustomerCode;
             var phoneNumber = customer.PhoneNumber;
@@ -36,80 +41,74 @@ namespace MISA.ApplicationCore
 
             if (string.IsNullOrEmpty(customerCode))
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "CustomerCode", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999,
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Mã khách hàng không được để trống";
+                serviceResult.UserMsg = "Mã khách hàng không được để trống";
 
-                };
-
-                return BadRequest(msg);
+                return serviceResult;
             }
 
             if (string.IsNullOrEmpty(phoneNumber))
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "PhoneNumber", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999
-                };
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Số điện thoại không được để trống";
+                serviceResult.UserMsg = "Số điện thoại không được để trống";
 
-                return BadRequest(msg);
+                return serviceResult;
             }
 
             if (string.IsNullOrEmpty(email))
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "Email", msg = "Mã khách hàng không được để trống" },
-                    userMsg = "Mã khách hàng không được để trống",
-                    Code = 999
-                };
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Email không được để trống";
+                serviceResult.UserMsg = "Email không được để trống";
 
-                return BadRequest(msg);
+                return serviceResult;
             }
 
-            //validate trùng mã
+            //validate trùng nhau
             //mã khách hàng
-            var res = dbConnection.Query<Customer>("Proc_GetCustomerByCode", new { CustomerCode = customer.CustomerCode }, commandType: CommandType.StoredProcedure);
-            if (res.Count() > 0)
+            var res = customerDBContext.GetCustomerByCode(customerCode);
+            if (res != null)
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "CustomerCode", msg = "Mã khách hàng đã tồn tại" },
-                    userMsg = "Mã khách hàng đã tồn tại",
-                    Code = 999
-                };
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Mã khách hàng đã tồn tại";
+                serviceResult.UserMsg = "Mã khách hàng đã tồn tại";
 
-                return BadRequest(msg);
+                return serviceResult;
             }
             //số điện thoại
-            res = dbConnection.Query<Customer>("Proc_GetCustomerByPhoneNumber", new { PhoneNumber = customer.PhoneNumber }, commandType: CommandType.StoredProcedure);
-            if (res.Count() > 0)
+            res = customerDBContext.GetCustomerByPhone(phoneNumber);
+            if (res != null)
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "PhoneNumber", msg = "Số điện thoại khách hàng đã tồn tại" },
-                    userMsg = "Số điện thoại khách hàng đã tồn tại",
-                    Code = 999
-                };
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Số điện thoại khách hàng đã tồn tại";
+                serviceResult.UserMsg = "Số điện thoại khách hàng đã tồn tại";
 
-                return BadRequest(msg);
+                return serviceResult;
             }
             //email
-            res = dbConnection.Query<Customer>("Proc_GetCustomerByEmail", new { Email = customer.Email }, commandType: CommandType.StoredProcedure);
-            if (res.Count() > 0)
+            res = customerDBContext.GetCustomerByEmail(email);
+            if (res != null)
             {
-                var msg = new
-                {
-                    devMsg = new { fieldName = "Email", msg = "Email đã tồn tại" },
-                    userMsg = "Email đã tồn tại",
-                    Code = 999
-                };
+                serviceResult.Code = MISACode.Invalid;
+                serviceResult.devMsg = "Email khách hàng đã tồn tại";
+                serviceResult.UserMsg = "Email khách hàng đã tồn tại";
 
-                return BadRequest(msg);
+                return serviceResult;
+            }
+
+            //Nếu tất cả dữ liệu hợp lệ
+            int rowAffects = customerDBContext.InsertCustomer(customer);
+            if(rowAffects > 0)
+            {
+                serviceResult.Code = MISACode.Success;
+
+                return serviceResult;
+            } 
+            else
+            {
+                
             }
         }
         #endregion
