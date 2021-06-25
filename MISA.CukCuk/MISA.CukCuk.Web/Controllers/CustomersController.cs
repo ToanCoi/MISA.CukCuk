@@ -80,7 +80,7 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="customer">thông tin khách hàng cần sửa</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Customer customer)
+        public IActionResult Put(string id, [FromBody] Customer customer)
         {
             return Ok();
         }
