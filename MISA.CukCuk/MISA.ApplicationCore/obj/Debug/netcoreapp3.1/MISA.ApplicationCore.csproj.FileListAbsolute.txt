@@ -24,3 +24,5 @@ D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Application
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CopyComplete
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Entity.dll
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Entity.pdb

@@ -132,9 +132,55 @@ namespace MISA.Infrastructure
             return rowAffects;
         }
 
-        //Sửa thông tin khách hàng
+        /// <summary>
+        /// Sửa thông tin một khách hàng
+        /// </summary>
+        /// <param name="id">Id của khách hàng</param>
+        /// <param name="customer">Object khách hàng</param>
+        /// <returns>Số dòng ảnh hưởng</returns>
+        /// CreatedBy: NVTOAN 25/06/2021
+        public int UpdateCustomer(string id, Customer customer)
+        {
+            var connectionString = "User Id=dev;" +
+                                    "Host=47.241.69.179;" +
+                                    "Port=3306;" +
+                                    "Password=12345678;" +
+                                    "Database=MISACukCuk_Demo;" +
+                                    "Character Set=utf8";
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
 
-        //Xóa khách hàng theo id
+            int rowAffects = dbConnection.Execute("Proc_UpdateCustomer", param: new { CustomerId = id,
+                FullName = customer.FullName.ToString(),
+                DateOfBirth = customer.DateOfBirth,
+                PhoneNumber = customer.PhoneNumber,
+                Gender = customer.Gender,
+                Email = customer.Email,
+                CustomerGroupId = customer.CustomerGroupId
+
+            }, commandType: CommandType.StoredProcedure);
+
+            return rowAffects;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int Delete(string id)
+        {
+            var connectionString = "User Id=dev;" +
+                                    "Host=47.241.69.179;" +
+                                    "Port=3306;" +
+                                    "Password=12345678;" +
+                                    "Database=MISACukCuk_Demo;" +
+                                    "Character Set=utf8";
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
+
+            int rowAffects = dbConnection.Execute("Proc_DeleteCustomerById", new { CustomerId = id }, commandType: CommandType.StoredProcedure);
+
+            return rowAffects;
+        }
 
         #endregion
     }

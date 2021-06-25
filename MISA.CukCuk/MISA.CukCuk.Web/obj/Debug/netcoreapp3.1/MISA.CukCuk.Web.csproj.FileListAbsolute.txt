@@ -54,3 +54,5 @@ D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.RazorTargetAssemblyInfo.cache
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csproj.CopyComplete
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.genruntimeconfig.cache
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.dll
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.pdb

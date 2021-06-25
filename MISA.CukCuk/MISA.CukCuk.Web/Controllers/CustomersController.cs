@@ -65,7 +65,7 @@ namespace MISA.CukCuk.Web.Controllers
             }
             else if (serviceResult.Code == MISACode.Success && (int)serviceResult.Data > 0)
             {
-                return Created("tc", customer);
+                return Created("tc", serviceResult);
             }
             else
             {
@@ -82,24 +82,41 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody] Customer customer)
         {
-            return Ok();
+            var customerService = new CustomerService();
+
+            var serviceResult = customerService.UpdateCustomer(id, customer);
+
+            if (serviceResult.Code == MISACode.Invalid)
+            {
+                return BadRequest(serviceResult);
+            }
+            else if (serviceResult.Code == MISACode.Success && (int)serviceResult.Data > 0)
+            {
+                return Ok(serviceResult);
+            }
+            else
+            {
+                return NoContent();
+            }
         }
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            var connectionString = "User Id=dev;" +
-                                   "Host=47.241.69.179;" +
-                                   "Port=3306;" +
-                                   "Password=12345678;" +
-                                   "Database=MISACukCuk_Demo;" +
-                                   "Character Set=utf8";
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            var customerService = new CustomerService();
 
-            var rowAffects = dbConnection.Query("Proc_DeleteCustomerById", new { CustomerId = id }, commandType: CommandType.StoredProcedure);
+            var serviceResult = customerService.DeleteCustomer(id);
 
-            return Delete(id);
+
+            if ((int)serviceResult.Data > 0)
+            {
+                return Ok(serviceResult);
+            }
+            else
+            {
+                return NoContent();
+            }
         }
     }
 }
