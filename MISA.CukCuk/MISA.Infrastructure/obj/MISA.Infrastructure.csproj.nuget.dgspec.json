@@ -4,14 +4,14 @@
     "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {}
   },
   "projects": {
-    "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
+    "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
-        "projectName": "MISA.Entity",
-        "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
+        "projectUniqueName": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+        "projectName": "MISA.ApplicationCore",
+        "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\nvtoan\\.nuget\\packages\\",
-        "outputPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\obj\\",
+        "outputPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nvtoan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
-                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj"
+              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
+                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
               }
             }
           }
@@ -101,6 +101,10 @@
             "Dapper": {
               "target": "Package",
               "version": "[2.0.90, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "MySqlConnector": {
               "target": "Package",

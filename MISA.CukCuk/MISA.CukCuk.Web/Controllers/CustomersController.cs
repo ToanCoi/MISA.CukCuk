@@ -7,8 +7,9 @@ using Dapper;
 using System.Data;
 using MySqlConnector;
 using MISA.ApplicationCore;
-using MISA.Entity.Models;
-using MISA.Entity;
+using MISA.ApplicationCore.Enum;
+using MISA.ApplicationCore.Interface;
+using MISA.ApplicationCore.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +19,16 @@ namespace MISA.CukCuk.Web.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        #region Declare
+        ICustomerService _customerService;
+        #endregion
+
+        #region Constructor
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+        #endregion
         /// <summary>
         /// Lấy danh sách khách hàng
         /// </summary>
@@ -26,8 +37,7 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var customerService = new CustomerService();
-            var customers = customerService.GetCustomers();
+            var customers = _customerService.GetCustomers();
 
             return Ok(customers);
         }
@@ -39,10 +49,9 @@ namespace MISA.CukCuk.Web.Controllers
         /// <returns>Một khách hàng tìm được theo id</returns>
         /// CreateedBy: NVTOAN 24/06/2021
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult Get([FromRoute]Guid customerId)
         {
-            var customerService = new CustomerService();
-            var customer = customerService.GetCustomerById(id);
+            var customer = _customerService.GetCustomerById(customerId);
 
             return Ok(customer);
         }
@@ -53,11 +62,10 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="customer"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody] Customer customer)
+        public IActionResult Post([FromBody]Customer customer)
         {
-            var customerService = new CustomerService();
 
-            var serviceResult = customerService.InsertCustomer(customer);
+            var serviceResult = _customerService.InsertCustomer(customer);
 
             if (serviceResult.Code == MISACode.Invalid)
             {
@@ -65,7 +73,7 @@ namespace MISA.CukCuk.Web.Controllers
             }
             else if (serviceResult.Code == MISACode.Success && (int)serviceResult.Data > 0)
             {
-                return Created("tc", serviceResult);
+                return Created("success", serviceResult);
             }
             else
             {
@@ -80,11 +88,10 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="customer">thông tin khách hàng cần sửa</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] Customer customer)
+        public IActionResult Put([FromRoute]Guid customerid, [FromBody] Customer customer)
         {
-            var customerService = new CustomerService();
 
-            var serviceResult = customerService.UpdateCustomer(id, customer);
+            var serviceResult = _customerService.UpdateCustomer(customerid, customer);
 
             if (serviceResult.Code == MISACode.Invalid)
             {
@@ -102,11 +109,10 @@ namespace MISA.CukCuk.Web.Controllers
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(Guid customerId)
         {
-            var customerService = new CustomerService();
 
-            var serviceResult = customerService.DeleteCustomer(id);
+            var serviceResult = _customerService.DeleteCustomer(customerId);
 
 
             if ((int)serviceResult.Data > 0)

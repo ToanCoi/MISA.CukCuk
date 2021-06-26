@@ -1,13 +1,10 @@
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.deps.json
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csprojAssemblyReference.cache
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfoInputs.cache
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfo.cs
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CopyComplete
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.deps.json
@@ -24,5 +21,3 @@ D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.Application
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CopyComplete
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Entity.dll
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Entity.pdb

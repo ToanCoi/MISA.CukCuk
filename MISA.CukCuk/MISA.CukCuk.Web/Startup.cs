@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MISA.ApplicationCore;
+using MISA.ApplicationCore.Interface;
+using MISA.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,8 @@ namespace MISA.CukCuk.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

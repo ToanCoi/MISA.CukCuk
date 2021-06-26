@@ -22,9 +22,7 @@ E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Dapper
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MySqlConnector.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csproj.CopyComplete
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csprojAssemblyReference.cache
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.AssemblyInfoInputs.cache
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.AssemblyInfo.cs
@@ -54,5 +52,7 @@ D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.RazorTargetAssemblyInfo.cache
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.csproj.CopyComplete
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.genruntimeconfig.cache
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.dll
-E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.pdb
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb

@@ -27,14 +27,7 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {
-              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
-                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj"
-              },
-              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
-                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -91,6 +84,9 @@
             "projectReferences": {
               "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
                 "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
+              },
+              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
+                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
               }
             }
           }
@@ -136,60 +132,6 @@
         }
       }
     },
-    "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
-        "projectName": "MISA.Entity",
-        "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj",
-        "packagesPath": "C:\\Users\\nvtoan\\.nuget\\packages\\",
-        "outputPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\nvtoan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -214,8 +156,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj": {
-                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.Entity\\MISA.Entity.csproj"
+              "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
+                "projectPath": "E:\\NVToan\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
               }
             }
           }
@@ -233,6 +175,10 @@
             "Dapper": {
               "target": "Package",
               "version": "[2.0.90, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "MySqlConnector": {
               "target": "Package",
