@@ -48,7 +48,7 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id">id của khách hàng</param>
         /// <returns>Một khách hàng tìm được theo id</returns>
         /// CreateedBy: NVTOAN 24/06/2021
-        [HttpGet("{id}")]
+        [HttpGet("{customerId}")]
         public IActionResult Get([FromRoute]Guid customerId)
         {
             var customer = _customerService.GetCustomerById(customerId);
@@ -87,11 +87,13 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id">id của khách hàng</param>
         /// <param name="customer">thông tin khách hàng cần sửa</param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{customerId}")]
         public IActionResult Put([FromRoute]Guid customerid, [FromBody] Customer customer)
         {
 
             var serviceResult = _customerService.UpdateCustomer(customerid, customer);
+
+            customer.CustomerId = customerid;
 
             if (serviceResult.Code == MISACode.Invalid)
             {
@@ -108,7 +110,7 @@ namespace MISA.CukCuk.Web.Controllers
         }
 
         // DELETE api/<CustomersController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{customerId}")]
         public IActionResult Delete(Guid customerId)
         {
 

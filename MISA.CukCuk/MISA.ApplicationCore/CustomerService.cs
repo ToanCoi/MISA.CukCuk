@@ -52,7 +52,7 @@ namespace MISA.ApplicationCore
             //validate trùng nhau
             //mã khách hàng
             var res = _customerRepository.GetCustomerByCode(customer.CustomerCode);
-            if (res != null)
+            if (res != null && customerId != customer.CustomerId)
             {
                 var msg = new
                 {

@@ -41,10 +41,8 @@ D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Dapper.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MySqlConnector.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
-D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
-D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Entity.pdb
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\staticwebassets\MISA.CukCuk.Web.StaticWebAssets.Manifest.cache
 D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\staticwebassets\MISA.CukCuk.Web.StaticWebAssets.xml
@@ -56,3 +54,5 @@ E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Micros
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 E:\NVToan\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\OneDrive - ptit.edu.vn\MISA\Exercise\MISA.CukCuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

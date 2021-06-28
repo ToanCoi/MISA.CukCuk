@@ -81,27 +81,41 @@ namespace MISA.Infrastructure
 
         public int UpdateCustomer(Guid customerId, Customer customer)
         {
+            //map dữ liệu
+            var dynamicParam = MappingData(customer);
+
+            int rowAffects = _dbConnection.Execute("Proc_UpdateCustomer", dynamicParam, commandType: CommandType.StoredProcedure);
+
+            return rowAffects;
+        }
+
+        /// <summary>
+        /// Hàm mapping dữ liệu
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">Object cần mapping</param>
+        /// <returns>Object chứa các data mapping</returns>
+        private DynamicParameters MappingData<T>(T entity)
+        {
             var dynamicParam = new DynamicParameters();
 
-            foreach(var prop in customer.GetType().GetProperties())
+            foreach (var prop in entity.GetType().GetProperties())
             {
                 var propName = prop.Name;
-                var propValue = prop.GetValue(customer);
+                var propValue = prop.GetValue(entity);
                 var propType = prop.PropertyType;
 
-                if(propType == typeof(Guid) || propType == typeof(Guid?))
+                if (propType == typeof(Guid) || propType == typeof(Guid?))
                 {
                     dynamicParam.Add($"@{propName}", propValue, DbType.String);
-                } 
+                }
                 else
                 {
                     dynamicParam.Add($"@{propName}", propValue);
                 }
             }
 
-            int rowAffects = _dbConnection.Execute("Proc_UpdateCustomer", dynamicParam, commandType: CommandType.StoredProcedure);
-
-            return rowAffects;
+            return dynamicParam;
         }
 
         #endregion
