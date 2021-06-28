@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using MISA.ApplicationCore.Entities;
-using MISA.ApplicationCore.Interface;
+using MISA.ApplicationCore.Interface.Repository;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -10,32 +10,17 @@ using System.Text;
 
 namespace MISA.Infrastructure
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
-        #region Declare
-        IConfiguration _configuration;
-        string _connectionString = string.Empty;
-        IDbConnection _dbConnection = null;
-        #endregion
 
         #region Constructor
-
-        public CustomerRepository(IConfiguration configuration)
+        public CustomerRepository(IConfiguration configuration) : base(configuration)
         {
-            this._configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("MISACukCukConnectionString");
-            _dbConnection = new MySqlConnection(_connectionString);
-        }
 
+        }
         #endregion
 
         #region Method
-        public int DeleteCustomer(Guid customerId)
-        {
-            int rowAffects = _dbConnection.Execute("Proc_DeleteCustomerById", new { CustomerId = customerId.ToString() }, commandType: CommandType.StoredProcedure);
-
-            return rowAffects;
-        }
 
         public Customer GetCustomerByCode(string customerCode)
         {
@@ -64,60 +49,6 @@ namespace MISA.Infrastructure
 
             return customer;
         }
-
-        public IEnumerable<Customer> GetCustomers()
-        {
-            var customers = _dbConnection.Query<Customer>("Proc_GetCustomers", commandType: CommandType.StoredProcedure);
-
-            return customers;
-        }
-
-        public int InsertCustomer(Customer customer)
-        {
-            int rowAffects = _dbConnection.Execute("Proc_InsertCustomer", customer, commandType: CommandType.StoredProcedure);
-
-            return rowAffects;
-        }
-
-        public int UpdateCustomer(Guid customerId, Customer customer)
-        {
-            //map dữ liệu
-            var dynamicParam = MappingData(customer);
-
-            int rowAffects = _dbConnection.Execute("Proc_UpdateCustomer", dynamicParam, commandType: CommandType.StoredProcedure);
-
-            return rowAffects;
-        }
-
-        /// <summary>
-        /// Hàm mapping dữ liệu
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity">Object cần mapping</param>
-        /// <returns>Object chứa các data mapping</returns>
-        private DynamicParameters MappingData<T>(T entity)
-        {
-            var dynamicParam = new DynamicParameters();
-
-            foreach (var prop in entity.GetType().GetProperties())
-            {
-                var propName = prop.Name;
-                var propValue = prop.GetValue(entity);
-                var propType = prop.PropertyType;
-
-                if (propType == typeof(Guid) || propType == typeof(Guid?))
-                {
-                    dynamicParam.Add($"@{propName}", propValue, DbType.String);
-                }
-                else
-                {
-                    dynamicParam.Add($"@{propName}", propValue);
-                }
-            }
-
-            return dynamicParam;
-        }
-
         #endregion
     }
 }
