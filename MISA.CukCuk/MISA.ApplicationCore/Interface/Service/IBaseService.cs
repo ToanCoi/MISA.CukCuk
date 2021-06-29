@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,7 +28,7 @@ namespace MISA.ApplicationCore.Interface.Service
         /// <param name="entity">Đối tượng cần thêm mới</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
         /// NVTOAN 28/06/2021
-        int InsertEntity(TEntity entity);
+        ServiceResult InsertEntity(TEntity entity);
 
         /// <summary>
         /// Sửa thông tin một bản ghi
@@ -36,13 +37,13 @@ namespace MISA.ApplicationCore.Interface.Service
         /// <param name="entity">Đối tượng có những thông tin cần sửa</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
         /// CreatedBy: NVTOAN 28/06/2021
-        int UpdateEntity(Guid Id, TEntity entity);
+        ServiceResult UpdateEntity(Guid Id, TEntity entity);
 
         /// <summary>
         /// Xóa một bản ghi theo Id
         /// </summary>
         /// <param name="Id">Id của bản ghi cần xóa</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
-        int DeleteEntity(Guid Id);
+        ServiceResult DeleteEntity(Guid Id);
     }
 }

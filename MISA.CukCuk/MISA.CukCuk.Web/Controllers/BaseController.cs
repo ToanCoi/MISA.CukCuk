@@ -10,14 +10,14 @@ namespace MISA.CukCuk.Web.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public abstract class BaseEntityController<TEntity> : ControllerBase
+    public abstract class BaseController<TEntity> : ControllerBase
     {
         #region Declare
         IBaseService<TEntity> _baseService;
         #endregion
 
         #region Constructor
-        public BaseEntityController(IBaseService<TEntity> baseService)
+        public BaseController(IBaseService<TEntity> baseService)
         {
             _baseService = baseService;
         }

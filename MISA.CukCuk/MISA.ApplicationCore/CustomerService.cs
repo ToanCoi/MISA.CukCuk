@@ -19,12 +19,12 @@ namespace MISA.ApplicationCore
 
 
         #region Method
-        public override int InsertEntity(Customer entity)
+        public override ServiceResult InsertEntity(Customer entity)
         {
             return base.InsertEntity(entity);
         }
 
-        public override int UpdateEntity(Guid Id, Customer entity)
+        public override ServiceResult UpdateEntity(Guid Id, Customer entity)
         {
             return base.UpdateEntity(Id, entity);
         }

@@ -15,7 +15,7 @@ using MISA.ApplicationCore.Interface.Service;
 
 namespace MISA.CukCuk.Web.Controllers
 {
-    public class CustomersController : BaseEntityController<Customer>
+    public class CustomersController : BaseController<Customer>
     {
 
         #region Constructor

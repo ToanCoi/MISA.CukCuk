@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace MISA.ApplicationCore.Entities
     /// Khách hàng
     /// NVTOAN 24/06/2021
     /// </summary>
-    public class Customer
+    public class Customer : BaseEntity
     {
 
         #region property
@@ -17,11 +18,15 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Khóa chính
         /// </summary>
+        [PrimaryKey]
         public Guid CustomerId { get; set; }
 
         /// <summary>
         /// Mã khách hàng
         /// </summary>
+        [Required]
+        [Unique]
+        [DisplayName("Mã khách hàng")]
         public string CustomerCode { get; set; }
 
         /// <summary>
@@ -42,6 +47,9 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [Required]
+        [Unique]
+        [DisplayName("Số điện thoại")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
@@ -52,23 +60,10 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Email khách hàng
         /// </summary>
+        [Required]
+        [Unique]
+        [DisplayName("Email")]
         public string Email { get; set; }
-
-        /// <summary>
-        /// Ngày tạo
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
-
-
-        /// <summary>
-        /// Người tạo
-        /// </summary>
-        public string CreatedBy { get; set; }
-
-        /// <summary>
-        /// Ngày sửa
-        /// </summary>
-        public DateTime? ModifiedDate { get; set; }
 
         /// <summary>
         /// Khóa ngoại đến nhóm khách hàng

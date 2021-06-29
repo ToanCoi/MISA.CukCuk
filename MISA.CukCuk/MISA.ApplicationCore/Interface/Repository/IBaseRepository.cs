@@ -44,5 +44,13 @@ namespace MISA.ApplicationCore.Interface.Repository
         /// <param name="Id">Id của bản ghi cần xóa</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
         int DeleteEntity(Guid Id);
+
+        /// <summary>
+        /// Lấy bản ghi theo property
+        /// </summary>
+        /// <param name="entity">Object cần kiểm tra</param>
+        /// <param name="propName">Tên của trường cần kiểm tra</param>
+        /// <returns>Một bản ghi có property với value truyền vào</returns>
+        TEntity GetEntityByProperty(TEntity entity, string propName);
     }
 }

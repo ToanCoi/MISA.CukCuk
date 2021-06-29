@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interface.Repository;
 using MySqlConnector;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace MISA.Infrastructure
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         #region Declare
         IConfiguration _configuration;
@@ -99,6 +100,16 @@ namespace MISA.Infrastructure
             }
 
             return dynamicParam;
+        }
+
+        public TEntity GetEntityByProperty(TEntity entity, string propName)
+        {
+            var propvalue = entity.GetType().GetProperty(propName).GetValue(entity);
+
+            string query = $"select * FROM {_tableName} where {propName} = '{propvalue}'";
+            var entitySearch = _dbConnection.QueryFirstOrDefault<TEntity>(query);
+
+            return entitySearch;
         }
 
         #endregion
