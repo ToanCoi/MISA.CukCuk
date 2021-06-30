@@ -24,6 +24,7 @@ namespace MISA.ApplicationCore
         #region Declare
         IBaseRepository<TEntity> _baseRepository;
         ServiceResult _serviceResult;
+        List<string> _errorMsg;
         #endregion
 
         #region Constructor
@@ -31,6 +32,7 @@ namespace MISA.ApplicationCore
         {
             _baseRepository = baseRepository;
             _serviceResult = new ServiceResult() { Code = MISACode.Success };
+            _errorMsg = new List<string>();
         }
         #endregion
 
@@ -131,6 +133,16 @@ namespace MISA.ApplicationCore
 
                         //Thêm vào list
                         list.Add(entity);
+
+                        //Lấy tất cả dữ liệu trên db
+                        var allData = _baseRepository.GetEntities();
+
+                        //Validate dữ liệu
+                        foreach(var e in list)
+                        {
+                            this.Validate(e, list);
+                            this.Validate(e, allData);
+                        }
                     }
                 }
 
@@ -195,10 +207,10 @@ namespace MISA.ApplicationCore
         /// <param name="entity">Đối tượng cần validate</param>
         /// <returns>Dữ liệu đã đúng hay chưa</returns>
         /// CreatedBy: NVTOAN 29/06/2021
-        private bool Validate(TEntity entity)
+        private bool Validate(TEntity entity, IEnumerable<TEntity> entities = null)
         {
             var isValid = true;
-            entity.Status = new List<String>();
+            entity.Status = new List<string>();
 
             foreach (var prop in entity.GetType().GetProperties())
             {
