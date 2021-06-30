@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interface.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Web.Controllers
@@ -59,9 +61,9 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] TEntity entity)
         {
-            var rowAffect = _baseService.InsertEntity(entity);
+            var serviceResult = _baseService.InsertEntity(entity);
 
-            return Ok(rowAffect);
+            return Ok(serviceResult);
         }
 
         /// <summary>
@@ -89,6 +91,12 @@ namespace MISA.CukCuk.Web.Controllers
             var rowAffect = _baseService.DeleteEntity(Id);
 
             return Ok(rowAffect);
+        }
+
+        [HttpPost("import")]
+        public Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken)
+        {
+            return _baseService.Import(formFile, cancellationToken);
         }
         #endregion
     }

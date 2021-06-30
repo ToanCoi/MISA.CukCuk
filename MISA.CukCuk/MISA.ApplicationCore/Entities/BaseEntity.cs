@@ -40,5 +40,10 @@ namespace MISA.ApplicationCore.Entities
         /// Người sửa
         /// </summary>
         public string ModifiedBy { get; set; }
+
+        /// <summary>
+        /// Trạng thái insert của entity
+        /// </summary>
+        public List<String> Status { get; set; }
     }
 }

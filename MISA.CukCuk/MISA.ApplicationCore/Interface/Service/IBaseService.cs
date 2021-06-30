@@ -1,7 +1,11 @@
-﻿using MISA.ApplicationCore.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using MISA.ApplicationCore.Entities;
+using MISA.ApplicationCore.Enum;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interface.Service
 {
@@ -45,5 +49,7 @@ namespace MISA.ApplicationCore.Interface.Service
         /// <param name="Id">Id của bản ghi cần xóa</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
         ServiceResult DeleteEntity(Guid Id);
+
+        Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken);
     }
 }
