@@ -84,7 +84,7 @@ namespace MISA.ApplicationCore
                 _serviceResult.Message = "Định dạng file không được hỗ trợ";
             }
 
-            var list = new List<TEntity>();
+            var entities = new List<TEntity>();
 
             using (var stream = new MemoryStream())
             {
@@ -130,23 +130,26 @@ namespace MISA.ApplicationCore
                                 entity.GetType().GetProperty(prop.PropertyName).SetValue(entity, temp);
                             }
                         }
+                        entity.EntityState = EntityState.Add;
 
                         //Thêm vào list
-                        list.Add(entity);
+                        entities.Add(entity);
+                    }
 
-                        //Lấy tất cả dữ liệu trên db
-                        var allData = _baseRepository.GetEntities();
+                    //Lấy tất cả dữ liệu trên db để validate
+                    var allData = _baseRepository.GetEntities();
 
-                        //Validate dữ liệu
-                        foreach(var e in list)
-                        {
-                            this.Validate(e, list);
-                            this.Validate(e, allData);
-                        }
+                    //Validate dữ liệu
+                    foreach (var e in entities)
+                    {
+                        e.Status = new List<string>();
+
+                        this.Validate(e, entities);
+                        this.Validate(e, allData);
                     }
                 }
 
-                _serviceResult.Data = list;
+                _serviceResult.Data = entities;
                 _serviceResult.Code = MISACode.Success;
                 _serviceResult.Message = "Thành công";
             }
@@ -188,6 +191,8 @@ namespace MISA.ApplicationCore
             //validate dữ liệu
             this.Validate(entity);
 
+            _serviceResult.Data = entity;
+
             return _serviceResult;
         }
 
@@ -196,6 +201,8 @@ namespace MISA.ApplicationCore
             entity.EntityState = EntityState.Update;
             //validate dữ liệu
             this.Validate(entity);
+
+            _serviceResult.Data = entity;
 
             return _serviceResult;
         }
@@ -210,40 +217,33 @@ namespace MISA.ApplicationCore
         private bool Validate(TEntity entity, IEnumerable<TEntity> entities = null)
         {
             var isValid = true;
-            entity.Status = new List<string>();
 
             foreach (var prop in entity.GetType().GetProperties())
             {
                 var displayName = "";
                 //Tên hiển thị của property
-                if(prop.IsDefined(typeof(DisplayNameAttribute), false))
+                if (prop.IsDefined(typeof(DisplayNameAttribute), false))
                 {
                     displayName = prop.GetCustomAttributes(typeof(DisplayNameAttribute), false)
                                         .Cast<DisplayNameAttribute>().Single().DisplayName;
                 }
-                
+
 
                 //Validate required
                 if (prop.IsDefined(typeof(Required), false))
                 {
                     isValid = validateRequired(prop.GetValue(entity), displayName);
-                    if (!isValid)
-                    {
-                        string errorMsg = $"{displayName} không được để trống";
-                        entity.Status.Add(errorMsg);
-
-                        _serviceResult.Data = entity.Status;
-
-                        return false;
-                    }
                 }
 
                 //Validate Unique
-                if (isValid && prop.IsDefined(typeof(Unique), false))
+                if (prop.IsDefined(typeof(Unique), false) && (isValid || entities != null))
                 {
-                    isValid = ValidateUnique(entity, prop.Name, displayName);
+                    isValid = ValidateUnique(entity, prop.Name, displayName, entities);
                 }
             }
+
+            entity.Status.AddRange(_errorMsg);
+            _errorMsg.Clear();
 
             return isValid;
         }
@@ -259,6 +259,7 @@ namespace MISA.ApplicationCore
         {
             if (value == null || value.ToString().Length == 0)
             {
+                _errorMsg.Add($"{displayName} không được để trống");
                 _serviceResult.Code = MISACode.Invalid;
                 _serviceResult.Message = "Dữ liệu không hợp lệ";
 
@@ -275,23 +276,19 @@ namespace MISA.ApplicationCore
         /// <param name="propName">Field name của dữ liệu cần kiểm tra</param>
         /// <returns>Dữ liệu có hợp lệ hay không</returns>
         /// CrearedBy: NVTOAN 29/06/2021
-        private bool ValidateUnique(TEntity entity, string propName, object displayName)
+        private bool ValidateUnique(TEntity entity, string propName, object displayName, IEnumerable<TEntity> entities)
         {
-            var entitySearch = _baseRepository.GetEntityByProperty(entity, propName);
+            //Lấy ra entity để so sánh
+            var entitySearch = entities == null ? _baseRepository.GetEntityByProperty(entity, propName)
+                                                : entities
+                                                .FirstOrDefault(e => e.GetType().GetProperty(propName).GetValue(e) == entity.GetType().GetProperty(propName).GetValue(entity));
 
 
             if (entitySearch != null)
             {
                 if (entity.EntityState == EntityState.Add)
                 {
-                    var msg = new
-                    {
-                        devMsg = $"{displayName} đã tồn tại",
-                        userMsg = $"{displayName} đã tồn tại",
-                        Code = MISACode.Invalid
-                    };
-
-                    _serviceResult.Data = msg;
+                    _errorMsg.Add($"{displayName} đã tồn tại");
                     _serviceResult.Code = MISACode.Invalid;
                     _serviceResult.Message = "Dữ liệu không hợp lệ";
 
@@ -299,14 +296,7 @@ namespace MISA.ApplicationCore
                 }
                 else if (entity.EntityState == EntityState.Update && this.GetKeyProperty(entity).GetValue(entity) != this.GetKeyProperty(entitySearch).GetValue(entitySearch))
                 {
-                    var msg = new
-                    {
-                        devMsg = $"{displayName} đã tồn tại",
-                        userMsg = $"{displayName} đã tồn tại",
-                        Code = MISACode.Invalid
-                    };
-
-                    _serviceResult.Data = msg;
+                    _errorMsg.Add($"{displayName} đã tồn tại");
                     _serviceResult.Code = MISACode.Invalid;
                     _serviceResult.Message = "Dữ liệu không hợp lệ";
 

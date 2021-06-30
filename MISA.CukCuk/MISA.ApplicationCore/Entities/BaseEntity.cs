@@ -14,6 +14,9 @@ namespace MISA.ApplicationCore.Entities
     [AttributeUsage(AttributeTargets.Property)]
     public class PrimaryKey : Attribute { }
 
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ForeignKey : Attribute { }
+
     public class BaseEntity
     {
         /// <summary>

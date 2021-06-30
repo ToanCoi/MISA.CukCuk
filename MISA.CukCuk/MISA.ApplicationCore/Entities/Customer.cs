@@ -72,6 +72,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Khóa ngoại đến nhóm khách hàng
         /// </summary>
+        [ForeignKey]
         public Guid? CustomerGroupId { get; set; }
 
         /// <summary>
