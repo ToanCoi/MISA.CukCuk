@@ -48,8 +48,24 @@ namespace MISA.ApplicationCore.Interface.Service
         /// </summary>
         /// <param name="Id">Id của bản ghi cần xóa</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
         ServiceResult DeleteEntity(Guid Id);
 
+        /// <summary>
+        /// Lấy dữ liệu từ file Excel lên và validate
+        /// </summary>
+        /// <param name="formFile">File excel cần truyền dữ liệu</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Thông tin hợp lệ hay không của từng row</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
         Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Hàm insert nhiều dữ liệu
+        /// </summary>
+        /// <param name="entities">List dữ liệu cần insert</param>
+        /// <returns>Thông tin việc insert</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
+        ServiceResult MutilpleInsert(IEnumerable<TEntity> entities);
     }
 }

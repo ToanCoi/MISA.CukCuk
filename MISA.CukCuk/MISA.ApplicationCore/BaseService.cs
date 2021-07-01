@@ -5,6 +5,7 @@ using MISA.ApplicationCore.Interface.Repository;
 using MISA.ApplicationCore.Interface.Service;
 using OfficeOpenXml;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -31,7 +32,7 @@ namespace MISA.ApplicationCore
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
             _baseRepository = baseRepository;
-            _serviceResult = new ServiceResult() { Code = MISACode.Success };
+            _serviceResult = new ServiceResult() { Code = MISACode.Valid };
             _errorMsg = new List<string>();
         }
         #endregion
@@ -40,6 +41,18 @@ namespace MISA.ApplicationCore
         public ServiceResult DeleteEntity(Guid Id)
         {
             var rowAffect = _baseRepository.DeleteEntity(Id);
+
+            if(rowAffect > 0)
+            {
+                _serviceResult.Data = rowAffect;
+                _serviceResult.Code = MISACode.Success;
+                _serviceResult.Message = "Xóa thành công";
+            }
+            else
+            {
+                _serviceResult.Code = MISACode.Invalid;
+                _serviceResult.Message = "Xóa không thành công";
+            }
 
             return _serviceResult;
         }
@@ -54,6 +67,85 @@ namespace MISA.ApplicationCore
             return _baseRepository.GetEntityById(Id);
         }
 
+        public virtual ServiceResult InsertEntity(TEntity entity)
+        {
+            entity.EntityState = EntityState.Add;
+            //validate dữ liệu
+            this.Validate(entity);
+
+            _serviceResult.Data = entity;
+
+            if (_serviceResult.Code == MISACode.Valid)
+            {
+                _baseRepository.InsertEntity(entity);
+                _serviceResult.Code = MISACode.Success;
+            }
+
+            return _serviceResult;
+        }
+
+        public virtual ServiceResult UpdateEntity(Guid Id, TEntity entity)
+        {
+            entity.EntityState = EntityState.Update;
+            //validate dữ liệu
+            this.Validate(entity);
+
+            _serviceResult.Data = entity;
+
+            return _serviceResult;
+        }
+
+        public ServiceResult MutilpleInsert(IEnumerable<TEntity> entities)
+        {
+            var validRecord = 0;
+
+            //Lấy tất cả dữ liệu trên db để validate
+            var allData = _baseRepository.GetEntities();
+            //Tạo dictionary để check unique giá trị property
+            IDictionary<object, List<string>> uniqueProp = new Dictionary<object, List<string>>();
+
+            //Validate dữ liệu
+            foreach (var e in entities)
+            {
+                e.Status = new List<string>();
+
+                var isValid = this.Validate(e, allData, uniqueProp);
+
+                if (isValid)
+                {
+                    e.Status.Add("Hợp lệ");
+                }
+            }
+
+            foreach (var entity in entities)
+            {
+                if(entity.Status[0].Equals("Hợp lệ"))
+                {
+                    validRecord++;
+                    _baseRepository.InsertEntity(entity);
+                }
+            }
+
+            var insertInfo = new
+            {
+                Success = validRecord,
+                failed = entities.ToList().Count - validRecord
+            };
+
+            _serviceResult.Data = insertInfo;
+            _serviceResult.Code = MISACode.Success;
+
+            return _serviceResult;
+
+        }
+
+        /// <summary>
+        /// Hàm import dữ liệu từ excel vào db
+        /// </summary>
+        /// <param name="formFile">File excel cần import</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Kết quả import với từng row</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
         public async Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken)
         {
             if (formFile == null || formFile.Length <= 0)
@@ -96,7 +188,7 @@ namespace MISA.ApplicationCore
                     var rowCount = worksheet.Dimension.Rows;
                     var colCount = worksheet.Dimension.Columns;
 
-                    //Lấy tất cả property
+                    //Lấy tất cả property để mapping dữ liệu với excel
                     var properties = typeof(TEntity).GetProperties()
                                     .Where(p => p.IsDefined(typeof(DisplayNameAttribute), false))
                                     .Select(p => new
@@ -111,8 +203,6 @@ namespace MISA.ApplicationCore
                     {
                         //Khởi tạo entity
                         var entity = (TEntity)Activator.CreateInstance(typeof(TEntity), new object[] { });
-                        //dynamic entity = new ExpandoObject();
-                        //IDictionary<string, object> myUnderlyingObject = entity;
 
                         for (int col = 1; col <= colCount; col++)
                         {
@@ -130,7 +220,6 @@ namespace MISA.ApplicationCore
                                 entity.GetType().GetProperty(prop.PropertyName).SetValue(entity, temp);
                             }
                         }
-                        entity.EntityState = EntityState.Add;
 
                         //Thêm vào list
                         entities.Add(entity);
@@ -138,14 +227,20 @@ namespace MISA.ApplicationCore
 
                     //Lấy tất cả dữ liệu trên db để validate
                     var allData = _baseRepository.GetEntities();
+                    //Tạo dictionary để check unique giá trị property
+                    IDictionary<object, List<string>> uniqueProp = new Dictionary<object, List<string>>();
 
                     //Validate dữ liệu
                     foreach (var e in entities)
                     {
                         e.Status = new List<string>();
 
-                        this.Validate(e, entities);
-                        this.Validate(e, allData);
+                        var isValid = this.Validate(e, allData, uniqueProp);
+
+                        if(isValid)
+                        {
+                            e.Status.Add("Hợp lệ");
+                        }
                     }
                 }
 
@@ -158,6 +253,13 @@ namespace MISA.ApplicationCore
             return _serviceResult;
         }
 
+        /// <summary>
+        /// Hàm để chuyển dữ liệu từ dạng string khi lấy từ excel lên đúng kiểu dữ liệu của property
+        /// </summary>
+        /// <param name="type">Kiểu dữ liệu cần chuyển về</param>
+        /// <param name="value">Giá trị dữ liệu cần chuyển</param>
+        /// <returns>Dữ liệu đã chuyển về đúng dạng</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
         private dynamic ConvertDataType(Type type, string value)
         {
             dynamic res = null;
@@ -185,28 +287,6 @@ namespace MISA.ApplicationCore
             return res;
         }
 
-        public virtual ServiceResult InsertEntity(TEntity entity)
-        {
-            entity.EntityState = EntityState.Add;
-            //validate dữ liệu
-            this.Validate(entity);
-
-            _serviceResult.Data = entity;
-
-            return _serviceResult;
-        }
-
-        public virtual ServiceResult UpdateEntity(Guid Id, TEntity entity)
-        {
-            entity.EntityState = EntityState.Update;
-            //validate dữ liệu
-            this.Validate(entity);
-
-            _serviceResult.Data = entity;
-
-            return _serviceResult;
-        }
-
         #region Validate
         /// <summary>
         /// Validate dữ liệu
@@ -214,9 +294,13 @@ namespace MISA.ApplicationCore
         /// <param name="entity">Đối tượng cần validate</param>
         /// <returns>Dữ liệu đã đúng hay chưa</returns>
         /// CreatedBy: NVTOAN 29/06/2021
-        private bool Validate(TEntity entity, IEnumerable<TEntity> entities = null)
+        private bool Validate(TEntity entity, IEnumerable<TEntity> entities = null, IDictionary<object, List<string>> uniqueProp = null)
         {
             var isValid = true;
+            if(entities == null && uniqueProp == null)
+            {
+                entity.Status = new List<string>();
+            }
 
             foreach (var prop in entity.GetType().GetProperties())
             {
@@ -238,7 +322,7 @@ namespace MISA.ApplicationCore
                 //Validate Unique
                 if (prop.IsDefined(typeof(Unique), false) && (isValid || entities != null))
                 {
-                    isValid = ValidateUnique(entity, prop.Name, displayName, entities);
+                    isValid = ValidateUnique(entity, prop.Name, displayName, entities, uniqueProp);
                 }
             }
 
@@ -276,30 +360,58 @@ namespace MISA.ApplicationCore
         /// <param name="propName">Field name của dữ liệu cần kiểm tra</param>
         /// <returns>Dữ liệu có hợp lệ hay không</returns>
         /// CrearedBy: NVTOAN 29/06/2021
-        private bool ValidateUnique(TEntity entity, string propName, object displayName, IEnumerable<TEntity> entities)
+        private bool ValidateUnique(TEntity entity, string propName, object displayName, IEnumerable<TEntity> entities, IDictionary<object, List<string>> uniqueProp)
         {
-            //Lấy ra entity để so sánh
-            var entitySearch = entities == null ? _baseRepository.GetEntityByProperty(entity, propName)
-                                                : entities
-                                                .FirstOrDefault(e => e.GetType().GetProperty(propName).GetValue(e) == entity.GetType().GetProperty(propName).GetValue(entity));
+            var isUnique = true;
+            //insert thông thường
+            if(entities == null && uniqueProp == null)
+            {
+                isUnique = this.ValidateUniqueInsert(entity, propName, displayName);
+            } 
+            //import
+            else
+            {
+                //Lấy dữ liệu cần kiểm tra
+                var value = entity.GetType().GetProperty(propName).GetValue(entity);
 
+                if(value != null)
+                {
+                    //Validate với dữ liệu trên hệ thống
+                    isUnique = this.ValidateUniqueImportDb(entities, propName, value, displayName);
+
+                    //Validate với dữ liệu trong excel
+                    isUnique = this.ValidateUniqueImportExcel(uniqueProp, value, propName, displayName);
+                }
+            }
+
+            if(!isUnique)
+            {
+                _serviceResult.Code = MISACode.Invalid;
+                _serviceResult.Message = "Dữ liệu không hợp lệ";
+            }
+
+            return isUnique;
+        }
+
+        /// <summary>
+        /// Hàm validate Unique khi insert một bản ghi
+        /// </summary>
+        /// <param name="entity">Đối tượng cần kiểm tra</param>
+        /// <param name="propName">Tên trường dữ liệu cần kiểm tra</param>
+        /// <param name="displayName">Tên hiển thị của trường dữ liệu cần kiểm tra</param>
+        /// <returns>Dữ liệu có hợp lệ hay không</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
+        private bool ValidateUniqueInsert(TEntity entity, string propName, object displayName)
+        {
+            var entitySearch = _baseRepository.GetEntityByProperty(entity, propName);
 
             if (entitySearch != null)
             {
-                if (entity.EntityState == EntityState.Add)
+                //Nếu là form thêm hoặc là form sửa nhưng id không giống nhau
+                if (entity.EntityState == EntityState.Add ||
+                    (entity.EntityState == EntityState.Update && this.GetKeyProperty(entity).GetValue(entity) != this.GetKeyProperty(entitySearch).GetValue(entitySearch)))
                 {
                     _errorMsg.Add($"{displayName} đã tồn tại");
-                    _serviceResult.Code = MISACode.Invalid;
-                    _serviceResult.Message = "Dữ liệu không hợp lệ";
-
-                    return false;
-                }
-                else if (entity.EntityState == EntityState.Update && this.GetKeyProperty(entity).GetValue(entity) != this.GetKeyProperty(entitySearch).GetValue(entitySearch))
-                {
-                    _errorMsg.Add($"{displayName} đã tồn tại");
-                    _serviceResult.Code = MISACode.Invalid;
-                    _serviceResult.Message = "Dữ liệu không hợp lệ";
-
                     return false;
                 }
             }
@@ -307,6 +419,64 @@ namespace MISA.ApplicationCore
             return true;
         }
 
+        /// <summary>
+        /// Hàm kiểm tra dữ liệu đã tồn tại trong database chưa khi import
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="propName">Tên trường dữ liệu cần kiểm tra</param>
+        /// <param name="value">Dữ liệu cần kiểm tra</param>
+        /// <param name="displayName">Tên hiển thị của trường dữ liệu cần kiểm tra</param>
+        /// <returns>Dữ liệu có hợp lệ hay không</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
+        private bool ValidateUniqueImportDb(IEnumerable<TEntity> entities, string propName, object value, object displayName)
+        {
+            var entitySearch = entities.Where(e => e.GetType().GetProperty(propName).GetValue(e).ToString() == value.ToString()).FirstOrDefault();
+
+            if (entitySearch != null)
+            {
+                _errorMsg.Add($"{displayName} đã tồn tại trong hệ thống");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Hàm kiểm tra dữ liệu có trùng trong list dữ liệu import không
+        /// </summary>
+        /// <param name="uniqueProp">Một map check giá trị trùng lặp</param>
+        /// <param name="value">Dữ liệu cần kiểm tra</param>
+        /// <param name="propName">Tên trường dữ liệu cần kiểm tra</param>
+        /// <param name="displayName">Tên hiển thị của trường dữ liệu cần kiểm tra</param>
+        /// <returns>Dữ liệu có hợp lệ hay không</returns>
+        /// CreatedBy: NVTOAN 01/07/2021
+        private bool ValidateUniqueImportExcel(IDictionary<object, List<string>> uniqueProp, object value, string propName, object displayName)
+        {
+            //Nếu chưa từng có trong map
+            if (!uniqueProp.ContainsKey(value))
+            {
+                var list = new List<string>();
+                list.Add(propName);
+
+                uniqueProp.Add(value, list);
+            }
+            else
+            {
+                //Nếu dữ liệu đã từng xuất hiện
+                if (uniqueProp[value].Contains(propName))
+                {
+                    _errorMsg.Add($"{displayName} đã trùng với {displayName} khác nhập khẩu");
+
+                    return false;
+                }
+                else
+                {
+                    uniqueProp[value].Add(propName);
+                }
+            }
+
+            return true;
+        }
 
         private PropertyInfo GetKeyProperty(TEntity entity)
         {

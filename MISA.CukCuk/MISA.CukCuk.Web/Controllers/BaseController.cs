@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.ApplicationCore.Entities;
+using MISA.ApplicationCore.Enum;
 using MISA.ApplicationCore.Interface.Service;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,14 @@ namespace MISA.CukCuk.Web.Controllers
         {
             var serviceResult = _baseService.InsertEntity(entity);
 
-            return Ok(serviceResult);
+            if (serviceResult.Code == MISACode.Invalid)
+            {
+                return BadRequest(serviceResult);
+            }
+            else
+            {
+                return Ok(serviceResult);
+            }
         }
 
         /// <summary>
@@ -75,9 +83,16 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPut("{Id}")]
         public IActionResult Put(Guid Id, TEntity entity)
         {
-            var rowAffect = _baseService.UpdateEntity(Id, entity);
+            var serviceResult = _baseService.UpdateEntity(Id, entity);
 
-            return Ok(rowAffect);
+            if(serviceResult.Code == MISACode.Invalid)
+            {
+                return BadRequest(serviceResult);
+            }
+            else
+            {
+                return Ok(serviceResult);
+            }
         }
 
         /// <summary>
@@ -88,15 +103,30 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpDelete("{Id}")]
         public IActionResult Delete(Guid Id)
         {
-            var rowAffect = _baseService.DeleteEntity(Id);
+            var serviceResult = _baseService.DeleteEntity(Id);
 
-            return Ok(rowAffect);
+            if (serviceResult.Code == MISACode.Success)
+            {
+                return Ok(serviceResult);
+            }
+            else
+            {
+                return NoContent();
+            }
         }
 
         [HttpPost("import")]
         public Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken)
         {
             return _baseService.Import(formFile, cancellationToken);
+        }
+
+        [HttpPost]
+        public IActionResult MutilpleInsert([FromBody] IEnumerable<TEntity> entities)
+        {
+            var serviceResult = _baseService.MutilpleInsert(entities);
+
+            return Ok(serviceResult);
         }
         #endregion
     }
