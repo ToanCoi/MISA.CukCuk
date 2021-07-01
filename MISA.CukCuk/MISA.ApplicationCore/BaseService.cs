@@ -237,7 +237,7 @@ namespace MISA.ApplicationCore
 
                         var isValid = this.Validate(e, allData, uniqueProp);
 
-                        if(isValid)
+                        if(e.Status.Count == 0)
                         {
                             e.Status.Add("Hợp lệ");
                         }

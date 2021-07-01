@@ -121,7 +121,7 @@ namespace MISA.CukCuk.Web.Controllers
             return _baseService.Import(formFile, cancellationToken);
         }
 
-        [HttpPost]
+        [HttpPost("multipleInsert")]
         public IActionResult MutilpleInsert([FromBody] IEnumerable<TEntity> entities)
         {
             var serviceResult = _baseService.MutilpleInsert(entities);
