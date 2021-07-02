@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Enum;
 using MISA.ApplicationCore.Interface.Repository;
@@ -113,13 +114,13 @@ namespace MISA.ApplicationCore
 
                 if (isValid)
                 {
-                    e.Status.Add("Hợp lệ");
+                    e.Status.Add(MISACode.Valid.ToString());
                 }
             }
 
             foreach (var entity in entities)
             {
-                if(entity.Status[0].Equals("Hợp lệ"))
+                if(entity.Status[0].Equals(MISACode.Valid.ToString()))
                 {
                     validRecord++;
                     _baseRepository.InsertEntity(entity);
@@ -148,6 +149,7 @@ namespace MISA.ApplicationCore
         /// CreatedBy: NVTOAN 01/07/2021
         public async Task<ServiceResult> Import(IFormFile formFile, CancellationToken cancellationToken)
         {
+            //Nếu file trống
             if (formFile == null || formFile.Length <= 0)
             {
                 var msg = new
@@ -162,6 +164,7 @@ namespace MISA.ApplicationCore
                 _serviceResult.Message = "Không có dữ liệu để import";
             }
 
+            //Nếu định dạng file không hợp lệ
             if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
             {
                 var msg = new
@@ -239,9 +242,11 @@ namespace MISA.ApplicationCore
 
                         if(e.Status.Count == 0)
                         {
-                            e.Status.Add("Hợp lệ");
+                            e.Status.Add(MISACode.Valid.ToString());
                         }
                     }
+
+                    IMemoryCache
                 }
 
                 _serviceResult.Data = entities;
@@ -325,6 +330,9 @@ namespace MISA.ApplicationCore
                     isValid = ValidateUnique(entity, prop.Name, displayName, entities, uniqueProp);
                 }
             }
+
+            //Validate riêng
+            isValid = CustomValidate(entity, _errorMsg) == true ? isValid : false;
 
             entity.Status.AddRange(_errorMsg);
             _errorMsg.Clear();
@@ -475,6 +483,17 @@ namespace MISA.ApplicationCore
                 }
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// Hàm cho lớp con kế thừa để validate riêng
+        /// </summary>
+        /// <param name="entity">Đối tượng cần validate</param>
+        /// <param name="errorMsg">List lỗi trả về</param>
+        /// <returns></returns>
+        protected virtual bool CustomValidate(TEntity entity, List<string> errorMsg)
+        {
             return true;
         }
 

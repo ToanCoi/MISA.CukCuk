@@ -34,6 +34,8 @@ namespace MISA.CukCuk.Web
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICustomerGroupRepository, CustomerGroupRepository>();
+            services.AddScoped<ICustomerGroupService, CustomerGroupService>();
 
             services.AddSwaggerGen(options =>
             {

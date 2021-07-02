@@ -17,11 +17,14 @@ namespace MISA.CukCuk.Web.Controllers
 {
     public class CustomersController : BaseController<Customer>
     {
+        #region Declare
+        ICustomerService _customerSerice;
+        #endregion
 
         #region Constructor
-        public CustomersController(IBaseService<Customer> customerService) : base(customerService)
+        public CustomersController(ICustomerService customerService) : base(customerService)
         {
-          
+            _customerSerice = customerService;
         }
         #endregion
     }
